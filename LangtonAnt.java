@@ -50,7 +50,8 @@ public class LangtonAnt
  currentYOfAnt = ant.getPositionY();
  currentDirectionOfAnt = ant.getAntDirection();
  currentColor = getColor(currentXOfAnt, currentYOfAnt);
- 
+ //printAntDetails();
+ /*System.out.println("Now ant is in Board[" + currentXOfAnt + ", " + currentYOfAnt + "]     in " + currentColor + " with direction: " + currentDirectionOfAnt);*/
  if(currentColor.equalsIgnoreCase("White"))
   {
   moveRight();
