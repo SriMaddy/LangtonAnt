@@ -50,17 +50,14 @@ public class LangtonAnt
  currentYOfAnt = ant.getPositionY();
  currentDirectionOfAnt = ant.getAntDirection();
  currentColor = getColor(currentXOfAnt, currentYOfAnt);
- printAntDetails();
+ //printAntDetails();
  /*System.out.println("Now ant is in Board[" + currentXOfAnt + ", " + currentYOfAnt + "]     in " + currentColor + " with direction: " + currentDirectionOfAnt);*/
  if(currentColor.equalsIgnoreCase("White"))
   {
-  
   moveRight();
   }
  else
   {
-  setColor(previousXOfAnt, previousYOfAnt, "Black");
-  setColor(currentXOfAnt, currentYOfAnt, "White");
   moveLeft();
   }
  }
@@ -79,6 +76,8 @@ public class LangtonAnt
  {
  previousXOfAnt = currentXOfAnt;
  previousYOfAnt = currentYOfAnt;
+ setColor(previousXOfAnt, previousYOfAnt, "Black");
+ previousColor = getColor(previousXOfAnt, previousYOfAnt);
  if(currentDirectionOfAnt.equalsIgnoreCase("North"))
   {
   if(currentYOfAnt != yMax-1)
@@ -142,11 +141,80 @@ public class LangtonAnt
  ant.setAntDirection(currentDirectionOfAnt);
  ant.setPositionX(currentXOfAnt);
  ant.setPositionY(currentYOfAnt);
+ currentColor = getColor(currentXOfAnt, currentYOfAnt);
  printAntDetails();
  /*System.out.println("Ant moved from [" + previousXOfAnt + ", " + previousYOfAnt + "]        to [" + currentXOfAnt + ", " + currentYOfAnt + "] in " + currentColor + " with         direction from: " + previousDirectionOfAnt + " to: " + currentDirectionOfAnt);*/
  }
  private void moveLeft()
  {
- 
+ previousXOfAnt = currentXOfAnt;
+ previousYOfAnt = currentYOfAnt;
+ setColor(previousXOfAnt, previousYOfAnt, "White");
+ previousColor = getColor(previousXOfAnt, previousYOfAnt);
+ if(currentDirectionOfAnt.equalsIgnoreCase("North"))
+  {
+  if(currentYOfAnt != 0)
+   {
+   previousDirectionOfAnt = "North";
+   currentDirectionOfAnt = "West";
+   currentYOfAnt -= 1;
+   }
+  else
+   {
+   previousDirectionOfAnt = "North";
+   currentDirectionOfAnt = "East";
+   currentYOfAnt += 1;
+   }
+  }
+ else if(currentDirectionOfAnt.equalsIgnoreCase("South"))
+  {
+  if(currentYOfAnt != yMax-1)
+   {
+   previousDirectionOfAnt = "South";
+   currentDirectionOfAnt = "East";
+   currentYOfAnt += 1;
+   }
+  else
+   {
+   previousDirectionOfAnt = "South";
+   currentDirectionOfAnt = "West";
+   currentYOfAnt -= 1;
+   }
+  }
+ else if(currentDirectionOfAnt.equalsIgnoreCase("East"))
+  {
+  if(currentXOfAnt != 0)
+   {
+   previousDirectionOfAnt = "East";
+   currentDirectionOfAnt = "North";
+   currentXOfAnt -= 1;
+   }
+   else
+   {
+   previousDirectionOfAnt = "East";
+   currentDirectionOfAnt = "South";
+   currentXOfAnt += 1;
+   }
+  }
+ else if(currentDirectionOfAnt.equalsIgnoreCase("West"))
+  {
+  if(currentXOfAnt != xMax-1)
+   {
+   previousDirectionOfAnt = "West";
+   currentDirectionOfAnt = "South";
+   currentXOfAnt += 1;
+   }
+  else
+   {
+   previousDirectionOfAnt = "West";
+   currentDirectionOfAnt = "North";
+   currentXOfAnt -= 1;   
+   }
+  }
+ ant.setAntDirection(currentDirectionOfAnt);
+ ant.setPositionX(currentXOfAnt);
+ ant.setPositionY(currentYOfAnt);
+ currentColor = getColor(currentXOfAnt, currentYOfAnt);
+ printAntDetails();
  }
 }
